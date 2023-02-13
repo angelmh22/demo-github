@@ -1,6 +1,8 @@
 package com.s2daw.demo.controllers;
 
+import com.s2daw.demo.dao.UsuarioDao;
 import com.s2daw.demo.models.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +12,9 @@ import java.util.List;
 
 @RestController
 public class UsuarioController {
+
+    @Autowired
+    private UsuarioDao usuarioDao;
 
     @RequestMapping(value="usuario/{id}")
     public Usuario getUsuario(@PathVariable Long id) {
@@ -24,32 +29,8 @@ public class UsuarioController {
 
     @RequestMapping(value="usuarios")
     public List<Usuario> getUsuarios() {
-        List<Usuario> usuarios = new ArrayList<>();
-        Usuario usuario = new Usuario();
-        usuario.setId(111L);
-        usuario.setNombre("Ángel");
-        usuario.setApellido("Martínez");
-        usuario.setEmail("angelmartinezhu@gmail.com");
-        usuario.setTelefono("673415718");
+        return usuarioDao.getUsuarios();
 
-        Usuario usuario2 = new Usuario();
-        usuario2.setId(222L);
-        usuario2.setNombre("Sheila");
-        usuario2.setApellido("Corrales");
-        usuario2.setEmail("sheilacgarcia@gmail.com");
-        usuario2.setTelefono("684356722");
-
-        Usuario usuario3 = new Usuario();
-        usuario3.setId(333L);
-        usuario3.setNombre("Alvaro");
-        usuario3.setApellido("Adanez");
-        usuario3.setEmail("alvaroah15@gmail.com");
-        usuario3.setTelefono("693465238");
-
-        usuarios.add(usuario);
-        usuarios.add(usuario2);
-        usuarios.add(usuario3);
-        return usuarios;
     }
 
     @RequestMapping(value="usuario12")
